@@ -31,20 +31,21 @@ class Solution
 public:
     int findDuplicate(vector<int> &nums)
     {
-        int slow = nums[0], fast = nums[0];
-        while (true)
+        int slow = nums[0], fast = nums[0];   //two pointer declare
+        while (true)   //infinity loop because Amra jani cycle thakbei (duplicate guarantee). So eventually slow & fast meet korbei.
         {
-            slow = nums[slow];
-            fast = nums[nums[fast]];
-            if (slow == fast)
+            slow = nums[slow];  //Slow 1 step move kore.
+            fast = nums[nums[fast]];  //Fast 2 step move kore... Jodi cycle thake, fast eventually slow ke catch korbe.
+            if (slow == fast)   //Jodi meet kore → cycle detect hoye geche
                 break;
         }
-        slow = nums[0];
-        while (slow != fast)
+        slow = nums[0];   //Slow ke abar starting e pathalam.
+        while (slow != fast)   //Duita ek speed e cholbe.
         {
-            slow = nums[slow];
+            slow = nums[slow];   //Because now we are finding entry point of cycle.
             fast = nums[fast];
         }
-        return slow;
+        return slow;   //That point = cycle start... Cycle start = duplicate number
     }
+
 };
